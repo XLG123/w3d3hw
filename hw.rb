@@ -72,3 +72,51 @@ p reverse("atom") # => "mota"
 p reverse("q") # => "q"
 p reverse("id") # => "di"
 p reverse("") # => ""
+
+puts
+
+def upcase(str)
+  return str.upcase if str.length <= 1
+  str[0].upcase + upcase(str[1..-1])
+end
+
+def iterative_upcase(str)
+  str.each_char.inject("") do |upcased_str, c|
+    upcased_str << c.upcase
+  end
+end
+
+p upcase("")
+p upcase("what's on the floor")
+p upcase("flower two flower three")
+p iterative_upcase("desk no desk no")
+p iterative_upcase("yes yes yes")
+
+puts
+
+def quick_sort(arr)
+  return arr if arr.length <= 1
+  pivot = arr.sample
+  pivot_idx = arr.find_index(pivot)
+
+  left_side = []
+  right_side = []
+
+  arr.each_with_index do |num, idx|
+    if idx != pivot_idx
+      if num < pivot
+        left_side << num
+      else
+        right_side << num
+      end
+    end
+  end
+
+  quick_sort(left_side).concat([pivot], quick_sort(right_side))
+end
+
+p quick_sort([-2, 1, -9, 9, 3, -6, 0, 7, 4, 5, -1, -12, 10, -5, -7])
+
+puts
+
+p quick_sort([-2, 1, -9, 9, 3, -6, 0, 7, 4, 5, -1, -12, 10, -5, -7])
